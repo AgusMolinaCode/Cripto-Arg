@@ -1,24 +1,58 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState,useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import {ThemeProvider} from './context/ThemeContext'
+import Home from "./routes/Home";
+import Signin from "./routes/Signin";
+import Signup from "./routes/Signup";
+import Account from "./routes/Account";
+import CoinPage from "./routes/CoinPage";
+import axios from "axios";
+import Footer from "./components/Footer.jsx";
+import { AuthContextProvider } from "./context/AuthContext";
+
 
 function App() {
+
+  const [coins,setCoins] = useState([])
+
+  const url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=true'
+
+  useEffect(() => {
+    axios.get(url).then((response) => {
+      setCoins(response.data)
+      
+    })
+  }, [url])
+
+  const [dolar,setDolar] = useState({})
+
+  const Url = 'https://criptoya.com/api/dolar'
+
+  useEffect(() => {
+    axios.get(Url).then((response) => {
+      setDolar(response.data)
+      
+    })
+  }, [Url])
+  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider >
+      <AuthContextProvider>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home coins={coins} dolar={dolar}/>} />
+        <Route path="/signin" element={<Signin />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/account" element={<Account />} />
+        <Route path="/coin/:coinId" element={<CoinPage />} >
+          <Route path=":coinId" />
+        </Route>
+      </Routes>
+      <Footer />
+      </AuthContextProvider>
+    </ThemeProvider>
   );
 }
 
