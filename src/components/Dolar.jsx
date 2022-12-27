@@ -20,13 +20,13 @@ const Dolar = ({dolar}) => {
                 </tr>
             </thead>   
             <tbody>
-                <tr className='h-[50px] border-b overflow-hidden'>
-                    <td className='hidden sm:table-cell font-bold'>{dolar.solidario}</td>
-                    <td className='font-bold'>{dolar.blue}</td>
-                    <td className='hidden sm:table-cell font-bold'>{dolar.ccb}</td>
-                    <td className='hidden sm:table-cell font-bold'>{dolar.ccl}</td>
-                    <td className='hidden sm:table-cell font-bold'>{dolar.mep}</td>
-                    <td className='font-bold'>{dolar.oficial}</td>
+                <tr className='h-[50px] border-b overflow-hidden rounded-lg'>
+                    <td className='hidden sm:table-cell font-bold text-2xl'>{dolar.solidario}</td>
+                    <td className='font-bold text-2xl'>{dolar.blue}</td>
+                    <td className='hidden sm:table-cell font-bold text-2xl'>{dolar.ccb}</td>
+                    <td className='hidden sm:table-cell font-bold text-2xl'>{dolar.ccl}</td>
+                    <td className='hidden sm:table-cell font-bold text-2xl'>{dolar.mep}</td>
+                    <td className='font-bold text-2xl'>{dolar.oficial}</td>
                 </tr>
             </tbody>
         </table>
